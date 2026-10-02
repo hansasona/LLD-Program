@@ -46,20 +46,17 @@ public class VendingMachine {
     void selectProduct(String code) {
 
         if (state != State.IDLE) {
-            System.out.println("Cannot select product now");
-            return;
+           throw new IllegalArgumentException("Cannot select product now");
         }
 
         Slot slot = slots.get(code);
 
         if (slot == null) {
-            System.out.println("Slot not found");
-            return;
+            throw new IllegalArgumentException("Slot not found");
         }
 
         if (slot.quantity == 0) {
-            System.out.println("Product is out of stock");
-            return;
+            throw new IllegalArgumentException("Product is out of stock");
         }
 
         selectedProduct = slot.product;
